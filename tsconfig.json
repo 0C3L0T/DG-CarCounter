@@ -1,17 +1,17 @@
 {
   /* Visit https://aka.ms/tsconfig to read more about this file */
   "compilerOptions": {
-    "strict": true,
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "types": ["vite/client"],
-    "noEmit": true,
-    "isolatedModules": true,
-    "outDir": "dist",
+    "strict": true,                             /* Enable all strict type-checking options. */
+    "target": "ESNext",                         /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "ESNext",                         /* Specify what module code is generated. Nodenext? */
+    "moduleResolution": "node",                 /* Specify how TypeScript looks up a file from a given module specifier. */
+    "allowSyntheticDefaultImports": true,       /* Allow 'import x from y' when a module doesn't have a default export. */
+    "esModuleInterop": true,                    /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "jsx": "preserve",                          /* Specify what JSX code is generated. */
+    "jsxImportSource": "solid-js",              /* Specify module specifier used to import the JSX factory functions when using 'jsx: react-jsx*'. */
+    "types": ["vite/client"],                   /* Specify type package names to be included without being referenced in a source file. */
+    "noEmit": true,                             /* Disable emitting files from a compilation. */
+    "isolatedModules": true,                    /* Ensure that each file can be safely transpiled without relying on other imports. */
+    "outDir": "dist",                           /* Specify an output folder for all emitted files. */
   }
 }
