@@ -1,8 +1,11 @@
 import type { Component } from 'solid-js';
+import { getFirestore, collection, addDoc } from "firebase/firestore/lite";
+
+const db = getFirestore();
 
 const Order: Component = () => {
 
-    const handleSubmit = (e: Event) => {
+    const handleSubmit = async (e: Event) => {
         e.preventDefault();
         const data = new FormData(e.target as HTMLFormElement);
         const kenteken = data.get('kenteken');
@@ -11,6 +14,22 @@ const Order: Component = () => {
         const behandeling = data.get('behandeling');
 
         console.log(kenteken, naam, telefoonnummer, behandeling);
+        const result: HTMLElement | null = document.getElementById('result');
+
+        try {
+            const docRef = await addDoc(collection(db, "orders"), {
+                // make sure created_at is a timestamp given on the server
+                liscense_plate: kenteken,
+                name: naam,
+                phone: telefoonnummer,
+                plan: behandeling
+            });
+            console.log("Document written with ID: ", docRef.id);
+            result ? result.innerHTML = "Order is aangemaakt" : null;
+        } catch (e) {
+            console.error("Error adding document: ", e);
+            result ? result.innerHTML = "Er is iets fout gegaan" : null;
+        }
     }
 
     return (
@@ -31,6 +50,7 @@ const Order: Component = () => {
                 </select><br />
                 <input type={"submit"} value={"Maak Order"} />
             </form>
+            <p id={"result"}></p>
         </div>
     );
 };

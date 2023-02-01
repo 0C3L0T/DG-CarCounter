@@ -7,6 +7,7 @@ import { Router, Route, Routes } from '@solidjs/router';
 import { lazy } from 'solid-js';
 
 import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAHL3a8NgIR31S97JHsAu2fG_1EMy2jb7o",
@@ -17,7 +18,8 @@ const firebaseConfig = {
     appId: "1:229925355235:web:4fe2a98d0769b1a034cfd6"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+const firebase = initializeApp(firebaseConfig);
+getFirestore(firebase);
 
 const Order = lazy(() => import('./components/Order'));
 
