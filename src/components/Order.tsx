@@ -8,21 +8,21 @@ const Order: Component = () => {
     const handleSubmit = async (e: Event) => {
         e.preventDefault();
         const data = new FormData(e.target as HTMLFormElement);
-        const kenteken = data.get('kenteken');
-        const naam = data.get('naam');
-        const telefoonnummer = data.get('telefoonnummer');
-        const behandeling = data.get('behandeling');
+        const liscense_plate = data.get('kenteken');
+        const name = data.get('naam');
+        const phone = data.get('telefoonnummer');
+        const plan = data.get('behandeling');
 
-        console.log(kenteken, naam, telefoonnummer, behandeling);
+        console.log(liscense_plate, name, phone, plan);
         const result: HTMLElement | null = document.getElementById('result');
 
         try {
             const docRef = await addDoc(collection(db, "orders"), {
                 // make sure created_at is a timestamp given on the server
-                liscense_plate: kenteken,
-                name: naam,
-                phone: telefoonnummer,
-                plan: behandeling
+                liscense_plate: liscense_plate,
+                name: name,
+                phone: phone,
+                plan: plan
             });
             console.log("Document written with ID: ", docRef.id);
             result ? result.innerHTML = "Order is aangemaakt" : null;
