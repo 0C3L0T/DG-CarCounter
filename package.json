@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "vite",
+    "emulators": "firebase emulators:start",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"

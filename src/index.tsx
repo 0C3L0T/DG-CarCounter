@@ -23,6 +23,7 @@ const db = getFirestore(firebase);
 connectFirestoreEmulator(db, 'localhost', 8080);
 
 const Order = lazy(() => import('./components/Order'));
+const Overview = lazy(() => import('./components/Overview'));
 
 
 render(
@@ -31,6 +32,7 @@ render(
             <Routes>
                 <Route path="/" component={App} />
                 <Route path="/order" component={Order} />
+                <Route path="/overview" component={Overview} />
             </Routes>
         </Router>
     ),
