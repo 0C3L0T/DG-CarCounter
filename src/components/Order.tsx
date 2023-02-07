@@ -46,25 +46,37 @@ const Order: Component = () => {
         <div>
             <form onsubmit={handleSubmit} method="post">
                 <h1>Maak Order</h1>
+
                 <label>Merk</label> <br />
                 <input type="text" name="merk" /> <br />
+
                 <label>Type</label> <br />
                 <input type="text" name="type" /> <br />
+
                 <label>Carroserie</label> <br />
-                <input type="text" name="carroserie" /> <br />
+                <select name="carroserie">
+                    <option value="hatchback">Hatchback</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="coupe">Coupe</option>
+                    <option value="suv">SUV</option>
+                </select><br />
+
                 <label>Kleur</label> <br />
                 <select name="kleur">
                     <option value="black">Zwart</option>
                     <option value="other">Anders</option>
                 </select><br />
+
                 <label>Kenteken</label> <br />
                 <input type="text" name="kenteken" /> <br />
+
                 <label>Behandeling</label> <br />
                 <select name="behandeling">
-                    <option value="Brons">Brons</option>
-                    <option value="Silver">Silver</option>
-                    <option value="Goud">Goud</option>
+                    <option value="bronze">Brons</option>
+                    <option value="silver">Zilver</option>
+                    <option value="gold">Goud</option>
                 </select><br />
+
                 <input type={"submit"} value={"Maak Order"} />
             </form>
             <p id={"result"}></p>
