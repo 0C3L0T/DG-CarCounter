@@ -1,8 +1,7 @@
 import type { Component } from 'solid-js';
 import { createSignal, onMount } from 'solid-js';
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-import firebase from "firebase/compat";
-import DocumentData = firebase.firestore.DocumentData;
+import type { DocumentData } from "firebase/firestore";
 
 const db = getFirestore();
 
