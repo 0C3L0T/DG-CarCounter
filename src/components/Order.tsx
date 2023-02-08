@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js';
-import { getFirestore, collection, addDoc } from "firebase/firestore/lite";
+import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore/lite";
 
 const db = getFirestore();
 
@@ -20,6 +20,7 @@ const Order: Component = () => {
         const color = data.get('kleur');
         const license_plate = data.get('kenteken');
         const plan = data.get('behandeling');
+        const created_at = serverTimestamp();
 
         console.log(brand, type, body, color, license_plate, plan)
         const result: HTMLElement | null = document.getElementById('result');
@@ -32,7 +33,8 @@ const Order: Component = () => {
                 body,
                 color,
                 license_plate,
-                plan
+                plan,
+                created_at
             });
             console.log("Document written with ID: ", docRef.id);
             result ? result.innerHTML = "Order is aangemaakt" : null;

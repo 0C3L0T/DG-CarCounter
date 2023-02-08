@@ -41,15 +41,11 @@ function CalculateDuration(snap: functions.firestore.DocumentSnapshot): number {
 export default functions.firestore
     .document("orders/{orderId}")
     .onCreate((snap, __context) => {
-        const currentTime: number = Date.now();
-        // console.log('Order created: ', currentTime)
-        // console.log('Order created: ', snap.ref)
         const duration = CalculateDuration(snap);
         if (duration === -1) {
             return snap.ref.set({error: "Invalid order"}, {merge: true});
         }
         return snap.ref.set({
-                created_at: currentTime,
                 duration: duration,
             },
             {merge: true}
