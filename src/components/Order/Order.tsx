@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js';
-import {createSignal, lazy} from 'solid-js';
+import {createSignal, lazy, Show} from 'solid-js';
 import { onAuthStateChanged, getAuth, User} from "firebase/auth";
 
 const OrderForm = lazy(() => import('./OrderForm'));
@@ -17,18 +17,20 @@ const Order: Component = () => {
         }
     });
 
-
-    const userValue = user();
-
     return (
-        <div>
-            {
-                userValue ?
-                    <OrderForm user={userValue}/>
-                    : <><Login/><p>Log in om een order te plaatsen</p></>
+        <Show
+            when={user()}
+            fallback={
+                <div>
+                    <p>Log in om een order te plaatsen</p>
+                    <Login/>
+                </div>
             }
-        </div>
-    );
+            keyed
+        >
+            <OrderForm user={user() as User}></OrderForm>
+        </Show>
+    )
 }
 
 export default Order;
