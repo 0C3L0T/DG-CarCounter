@@ -39,7 +39,7 @@ function CalculateDuration(snap: functions.firestore.DocumentSnapshot): number {
 }
 
 export default functions.firestore
-    .document("orders/{orderId}")
+    .document("users/{userID}/orders/{orderId}")
     .onCreate((snap, __context) => {
         const duration = CalculateDuration(snap);
         if (duration === -1) {

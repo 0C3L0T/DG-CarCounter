@@ -1,9 +1,10 @@
 import type { Component } from 'solid-js';
 import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore/lite";
+import { User } from "firebase/auth";
 
 const db = getFirestore();
 
-const Order: Component = () => {
+const OrderForm: Component<{user: User}> = (props) => {
     // FORM VALIDATION
     /*
     const [brand, setBrand] = createSignal<string>('');
@@ -22,12 +23,12 @@ const Order: Component = () => {
         const plan = data.get('behandeling');
         const created_at = serverTimestamp();
 
-        console.log(brand, type, body, color, license_plate, plan)
+        console.log(brand, type, body, color, license_plate, plan, created_at)
         const result: HTMLElement | null = document.getElementById('result');
 
         try {
-            const docRef = await addDoc(collection(db, "orders"), {
-                // created_at will be added automatically
+            // add order to user collection in database
+            const docRef = await addDoc(collection(db, "users", props.user.uid, "orders"), {
                 brand,
                 type,
                 body,
@@ -43,6 +44,7 @@ const Order: Component = () => {
             result ? result.innerHTML = "Er is iets fout gegaan" : null;
         }
     }
+
 
     return (
         <div>
@@ -86,4 +88,4 @@ const Order: Component = () => {
     );
 };
 
-export default Order;
+export default OrderForm;

@@ -21,7 +21,7 @@ const firebase = initializeApp(firebaseConfig);
 const db = getFirestore(firebase);
 connectFirestoreEmulator(db, 'localhost', 8080);
 
-const Order = lazy(() => import('./components/Order'));
+const Order = lazy(() => import('./components/Order/Order'));
 const Overview = lazy(() => import('./components/Overview'));
 const Login = lazy(() => import('./components/Login'));
 
