@@ -1,17 +1,10 @@
 import type { Component } from 'solid-js';
-import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore/lite";
+import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { User } from "firebase/auth";
 
 const db = getFirestore();
 
 const OrderForm: Component<{user: User}> = (props) => {
-    // FORM VALIDATION
-    /*
-    const [brand, setBrand] = createSignal<string>('');
-    const [type, setType] = createSignal<string>('');
-
-    */
-
     const handleSubmit = async (e: Event) => {
         e.preventDefault();
         const data = new FormData(e.target as HTMLFormElement);
@@ -22,20 +15,22 @@ const OrderForm: Component<{user: User}> = (props) => {
         const license_plate = data.get('kenteken');
         const plan = data.get('behandeling');
         const created_at = serverTimestamp();
+        const user = props.user.uid;
 
         console.log(brand, type, body, color, license_plate, plan, created_at)
         const result: HTMLElement | null = document.getElementById('result');
 
         try {
             // add order to user collection in database
-            const docRef = await addDoc(collection(db, "users", props.user.uid, "orders"), {
+            const docRef = await addDoc(collection(db, "orders"), {
                 brand,
                 type,
                 body,
                 color,
                 license_plate,
                 plan,
-                created_at
+                created_at,
+                user
             });
             console.log("Document written with ID: ", docRef.id);
             result ? result.innerHTML = "Order is aangemaakt" : null;

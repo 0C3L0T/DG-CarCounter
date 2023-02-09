@@ -1,24 +1,41 @@
 import type { Component } from 'solid-js';
-import { createSignal, onMount } from 'solid-js';
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import {createSignal, onMount, Show} from 'solid-js';
+import { getFirestore, collection, getDocs, query, onSnapshot} from "firebase/firestore";
 import type { DocumentData } from "firebase/firestore";
 
 const db = getFirestore();
 
-// TODO impolement document created callback
-// display all current orders in the database
 const Overview: Component = () => {
     const [orders, setOrders] = createSignal<DocumentData[]>([]);
 
+    const orderQuery = query(collection(db, "orders"));
+    onSnapshot(orderQuery, (querySnapshot) => {
+        const orders: DocumentData[] = [];
+        querySnapshot.forEach((doc) => {
+            orders.push(doc.data());
+        });
+        setOrders(orders);
+    });
+
+    // get orders from all users
     const getOrders = async () => {
+        const orders: DocumentData[] = [];
+
         const querySnapshot = await getDocs(collection(db, "orders"));
-        const orders_snapshot: DocumentData[] = querySnapshot.docs.map(doc => doc.data());
-        setOrders(orders_snapshot);
+        querySnapshot.forEach((doc) => {
+            orders.push(doc.data());
+        });
+
+        setOrders(orders);
     }
 
     onMount(getOrders);
 
     return (
+        <Show
+            when={orders()}
+            fallback={<div>Er zijn nog geen orders</div>}
+         keyed>
         <div>
             <h1>Overzicht</h1>
             <table>
@@ -46,6 +63,7 @@ const Overview: Component = () => {
                 </tbody>
             </table>
         </div>
+        </Show>
     )
 }
 
