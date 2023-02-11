@@ -5,7 +5,7 @@ import type { DocumentData } from "firebase/firestore";
 
 const db = getFirestore();
 
-const Overview: Component = () => {
+const AllCars: Component = () => {
     const [orders, setOrders] = createSignal<DocumentData[]>([]);
 
     const orderQuery = query(collection(db, "orders"));
@@ -37,7 +37,7 @@ const Overview: Component = () => {
             fallback={<div>Er zijn nog geen orders</div>}
          keyed>
         <div>
-            <h1>Overzicht</h1>
+            <h1>Alle Orders</h1>
             <table>
                 <thead>
                     <tr>
@@ -67,4 +67,4 @@ const Overview: Component = () => {
     )
 }
 
-export default Overview;
+export default AllCars;

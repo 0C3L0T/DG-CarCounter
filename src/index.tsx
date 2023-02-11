@@ -1,7 +1,6 @@
 /* @refresh reload */
 import { render } from 'solid-js/web';
-import { Router, Route, Routes } from '@solidjs/router';
-// link to other pages using the 'A' component of the router
+import {Router, Route, Routes} from '@solidjs/router';
 
 import { lazy } from 'solid-js';
 
@@ -22,15 +21,17 @@ const db = getFirestore(firebase);
 connectFirestoreEmulator(db, 'localhost', 8080);
 
 const Order = lazy(() => import('./components/Order/Order'));
-const Overview = lazy(() => import('./components/Overview'));
+const Overview = lazy(() => import('./components/overview/Overview'));
 const Login = lazy(() => import('./components/Login'));
+const Home = lazy(() => import('./components/Home'));
 
 
 render(
     () => (
         <Router>
             <Routes>
-                <Route path="/" component={Login} />
+                <Route path="/" component={Home} />
+                <Route path="/login" component={Login} />
                 <Route path="/order" component={Order} />
                 <Route path="/overview" component={Overview} />
             </Routes>
