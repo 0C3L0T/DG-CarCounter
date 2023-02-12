@@ -12,15 +12,13 @@ const OrderForm: Component<{user: User}> = (props) => {
 
         if (await submit(form)) {
             result ? result.innerHTML = "Order is aangemaakt" : null;
-            console.log("goed")
         } else {
             result ? result.innerHTML = "Er is iets fout gegaan" : null;
-            console.log("fout");
         }
     }
 
     return (
-        // look at For
+        // look at For: https://www.solidjs.com/docs/latest/api#for
         <div>
             <form onSubmit={handleSubmit} method="post">
                 <h1>Maak Order</h1>
