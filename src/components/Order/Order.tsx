@@ -2,7 +2,7 @@ import type { Component } from 'solid-js';
 import {createSignal, lazy, Show} from 'solid-js';
 import { onAuthStateChanged, getAuth, User} from "firebase/auth";
 
-const OrderForm = lazy(() => import('./OrderForm'));
+const OrderForm = lazy(() => import('./orderForm'));
 const Login = lazy(() => import('../Login'));
 
 const auth = getAuth();

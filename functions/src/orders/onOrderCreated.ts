@@ -43,7 +43,7 @@ export default functions.firestore
     .onCreate((snap, __context) => {
         const duration = CalculateDuration(snap);
         if (duration === -1) {
-            return snap.ref.set({error: "Invalid order"}, {merge: true});
+            return snap.ref.set({status: "Invalid order"}, {merge: true});
         }
         return snap.ref.set({
                 duration: duration,
