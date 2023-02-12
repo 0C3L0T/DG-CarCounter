@@ -16,6 +16,7 @@ const OrderForm: Component<{user: User}> = (props) => {
         const plan = data.get('behandeling');
         const created_at = serverTimestamp();
         const user = props.user.uid;
+        const order_status = data.get('order_status') ? 'rush' : 'pending';
 
         console.log(brand, type, body, color, license_plate, plan, created_at)
         const result: HTMLElement | null = document.getElementById('result');
@@ -30,7 +31,8 @@ const OrderForm: Component<{user: User}> = (props) => {
                 license_plate,
                 plan,
                 created_at,
-                user
+                user,
+                order_status
             });
             console.log("Document written with ID: ", docRef.id);
             result ? result.innerHTML = "Order is aangemaakt" : null;
@@ -75,6 +77,9 @@ const OrderForm: Component<{user: User}> = (props) => {
                     <option value="silver">Zilver</option>
                     <option value="gold">Goud</option>
                 </select><br />
+
+                <label>Spoedorder</label> <br />
+                <input type="checkbox" name="spoedorder" /> <br />
 
                 <input type={"submit"} value={"Maak Order"} />
             </form>
