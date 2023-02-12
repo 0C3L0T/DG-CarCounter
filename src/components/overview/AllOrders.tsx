@@ -5,30 +5,28 @@ import type { DocumentData } from "firebase/firestore";
 
 const db = getFirestore();
 
-const AllCars: Component = () => {
-    const [orders, setOrders] = createSignal<DocumentData[]>([]);
+const [orders, setOrders] = createSignal<DocumentData[]>([]);
+const orderQuery = query(collection(db, "orders"));
+onSnapshot(orderQuery, (querySnapshot) => {
+    const orders: DocumentData[] = [];
+    querySnapshot.forEach((doc) => {
+        orders.push(doc.data());
+    });
+    setOrders(orders);
+});
 
-    const orderQuery = query(collection(db, "orders"));
-    onSnapshot(orderQuery, (querySnapshot) => {
-        const orders: DocumentData[] = [];
-        querySnapshot.forEach((doc) => {
-            orders.push(doc.data());
-        });
-        setOrders(orders);
+// get orders from all users
+const getOrders = async () => {
+    const orders: DocumentData[] = [];
+
+    const querySnapshot = await getDocs(collection(db, "orders"));
+    querySnapshot.forEach((doc) => {
+        orders.push(doc.data());
     });
 
-    // get orders from all users
-    const getOrders = async () => {
-        const orders: DocumentData[] = [];
-
-        const querySnapshot = await getDocs(collection(db, "orders"));
-        querySnapshot.forEach((doc) => {
-            orders.push(doc.data());
-        });
-
-        setOrders(orders);
-    }
-
+    setOrders(orders);
+}
+const AllOrders: Component = () => {
     onMount(getOrders);
 
     return (
@@ -47,6 +45,7 @@ const AllCars: Component = () => {
                         <th>Kleur</th>
                         <th>Kenteken</th>
                         <th>Behandeling</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +57,7 @@ const AllCars: Component = () => {
                             <td>{order.color}</td>
                             <td>{order.license_plate}</td>
                             <td>{order.plan}</td>
+                            <td>{order.order_status}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -67,4 +67,4 @@ const AllCars: Component = () => {
     )
 }
 
-export default AllCars;
+export default AllOrders;
