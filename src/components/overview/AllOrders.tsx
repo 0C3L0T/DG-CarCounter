@@ -52,12 +52,12 @@ const AllOrders: Component = () => {
                     {orders().map((order, __created_at) => (
                         <tr>
                             <td>{order.brand}</td>
-                            <td>{order.type}</td>
-                            <td>{order.body}</td>
+                            <td>{order.model}</td>
+                            <td>{order.bodyType}</td>
                             <td>{order.color}</td>
-                            <td>{order.license_plate}</td>
+                            <td>{order.licensePlate}</td>
                             <td>{order.plan}</td>
-                            <td>{order.order_status}</td>
+                            <td>{order.status}</td>
                         </tr>
                     ))}
                 </tbody>
