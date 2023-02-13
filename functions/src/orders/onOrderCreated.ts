@@ -1,53 +1,19 @@
-import * as functions from "firebase-functions";
+import { firestore } from "firebase-functions";
+import calculateDuration from "./calculateDuration";
 
-/**
- * Calculate the duration of the order in days, return -1 if the order is not found
- * @param snap
- * @constructor
- */
-function CalculateDuration(snap: functions.firestore.DocumentSnapshot): number {
-    const order = snap.data();
-    let duration = 0;
 
-    if (order) {
-        switch (order.plan) {
-            case "bronze":
-                duration += 1;
-                break;
-            case "silver":
-                duration += 2;
-                break;
-            case "gold":
-                duration += 3;
-                break;
-            default:
-                return -1; // invalid plan
-        }
-
-        if (order.color === "black") {
-            duration += 1;
-        }
-
-        if (order.body === "suv") {
-            duration += 1;
-        }
-
-        return duration;
-    } else {
-        return -1
-    }
-}
-
-export default functions.firestore
+export default firestore
     .document("orders/{orderId}")
     .onCreate((snap, __context) => {
-        const duration = CalculateDuration(snap);
-        if (duration === -1) {
+        const data = snap.data();
+
+        // calculate how long the order will take to complete
+        const result = calculateDuration(data);
+        if (result !== -1) {
+            return snap.ref.set({duration: result}, {merge: true});
+        } else {
             return snap.ref.set({status: "Invalid order"}, {merge: true});
         }
-        return snap.ref.set({
-                duration: duration,
-            },
-            {merge: true}
-        );
+
+        // schedule the order
     });
