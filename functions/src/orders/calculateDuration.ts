@@ -1,5 +1,4 @@
-import {firestore} from "firebase-admin";
-import DocumentData = firestore.DocumentData;
+import { DocumentData } from "firebase/firestore";
 
 export default function CalculateDuration(order: DocumentData): number {
     let duration = 0;
