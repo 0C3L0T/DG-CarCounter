@@ -12,7 +12,7 @@ type FormFields = {
     licensePlate: string;
     plan: string;
     createdAt: string;
-    userId: User['uid'];
+    userId: string;
     status: string;
     duration: number;
 };
