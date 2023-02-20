@@ -1,6 +1,6 @@
 import type { Component } from 'solid-js';
-import {createSignal, onMount, Show} from 'solid-js';
-import { getFirestore, collection, getDocs, query, onSnapshot} from "firebase/firestore";
+import {createSignal, Show} from 'solid-js';
+import { getFirestore, collection, query, onSnapshot} from "firebase/firestore";
 import type { DocumentData } from "firebase/firestore";
 
 const db = getFirestore();
@@ -15,23 +15,10 @@ onSnapshot(orderQuery, (querySnapshot) => {
     setOrders(orders);
 });
 
-// get orders from all users
-const getOrders = async () => {
-    const orders: DocumentData[] = [];
-
-    const querySnapshot = await getDocs(collection(db, "orders"));
-    querySnapshot.forEach((doc) => {
-        orders.push(doc.data());
-    });
-
-    setOrders(orders);
-}
 const AllOrders: Component = () => {
-    onMount(getOrders);
-
     return (
         <Show
-            when={orders()}
+            when={orders().length != 0}
             fallback={<div>Er zijn nog geen orders</div>}
          keyed>
         <div>
