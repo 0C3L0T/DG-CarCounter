@@ -10,15 +10,14 @@ export default functions.firestore
         const orderData = snap.data();
         const orderId = context.params.orderId;
 
-        const batch = admin.firestore().batch();
-
         const duration = calculateDuration(orderData);
-        batch.update(snap.ref, {duration: duration});
-
-        await scheduleOrder(batch, orderId, duration);
 
         try {
-            await batch.commit();
+            // await batch.commit();
+            await admin.firestore().runTransaction(async (transaction) => {
+                await scheduleOrder(transaction, orderId, duration);
+            });
+
             await snap.ref.set({status: "scheduled"}, {merge: true});
         } catch (e) {
             console.error(e);
