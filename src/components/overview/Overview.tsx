@@ -2,11 +2,12 @@ import {lazy, Show} from "solid-js";
 
 const AllOrders = lazy(() => import('./AllOrders'));
 const Schedule = lazy(() => import('./Schedule'));
-const today = new Date();
-// get tomorrow's date
-today.setDate(today.getDate() + 1);
 
 const Overview = () => {
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
     return (
         // we should check if the user has the right permissions to view this page
         <Show when={true} fallback={
@@ -15,6 +16,7 @@ const Overview = () => {
             <div>
                 <AllOrders/>
                 <Schedule date={today}/>
+                <Schedule date={tomorrow}/>
             </div>
         </Show>
     );
