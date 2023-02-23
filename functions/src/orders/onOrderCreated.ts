@@ -22,4 +22,6 @@ export default functions.firestore
         } catch (e) {
             console.error(e);
         }
+
+        return;
     });
