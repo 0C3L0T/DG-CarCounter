@@ -4,16 +4,41 @@ import { getFirestore, collection, addDoc, serverTimestamp} from "firebase/fires
 
 const db = getFirestore();
 
+enum orderStatus {
+    pending = 'pending',
+    urgent = 'urgent',
+    scheduled = 'scheduled',
+}
+
+enum orderPlan {
+    bronze = 'bronze',
+    silver = 'silver',
+    gold = 'gold',
+}
+
+enum orderColor {
+    black = 'black',
+    other = 'other',
+}
+
+enum orderBodyType {
+    sedan = 'sedan',
+    hatchback = 'hatchback',
+    suv = 'suv',
+   coupe = 'coupe',
+}
+
+
 type FormFields = {
     brand: string;
     model: string;
-    bodyType: string;
-    color: string;
+    bodyType: orderBodyType;
+    color: orderColor;
     licensePlate: string;
-    plan: string;
-    createdAt: string;
+    plan: orderPlan;
+    createdAt: null | string;
     userId: string;
-    status: string;
+    status: orderStatus;
     duration: number;
 };
 
@@ -28,7 +53,7 @@ const submit = async (form: FormFields) => {
         plan: form.plan,
         createdAt: serverTimestamp(),
         userId: form.userId,
-        status: form.status ? 'urgent' : 'pending',
+        status: form.status ? orderStatus.urgent : orderStatus.pending,
         duration: -1,
     }
 
@@ -54,13 +79,13 @@ const useForm = (user: User) => {
     const [form, setForm] = createStore<FormFields>({
         brand: '',
         model: '',
-        bodyType: '',
-        color: '',
+        bodyType: orderBodyType.sedan,
+        color: orderColor.black,
         licensePlate: '',
-        plan: '',
+        plan: orderPlan.bronze,
         createdAt: '',
         userId: user.uid,
-        status: 'pending',
+        status: orderStatus.pending,
         duration: -1,
     });
 
