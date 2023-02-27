@@ -9,12 +9,13 @@ export default functions.firestore
     .onCreate(async (snap, context) => {
         const orderData = snap.data();
         const orderId = context.params.orderId;
+        const orderStartDate = orderData.date; // iso date string
 
         const duration = calculateDuration(orderData);
 
         try {
             await admin.firestore().runTransaction(async (transaction) => {
-                await scheduleOrder(transaction, orderId, duration);
+                await scheduleOrder(transaction, orderId, orderStartDate, duration);
             });
 
             await snap.ref.set({status: "scheduled"}, {merge: true});

@@ -27,7 +27,7 @@ const Order: Component = () => {
             }
             keyed
         >
-            <OrderForm user={user() as User}></OrderForm>
+            <OrderForm/>
         </Show>
     )
 }

@@ -1,12 +1,11 @@
 import type { Component } from 'solid-js';
 import useForm from './useForm';
-import { User } from 'firebase/auth';
 import { For } from 'solid-js/web';
 
-import {orderBodyType, orderBrand} from "./orderTypes";
+import {orderBodyType, orderBrand, orderPlan} from "./orderTypes";
 
-const OrderForm: Component<{user: User}> = (props) => {
-    const { form, updateFormField, submit } = useForm(props.user);
+const OrderForm: Component = () => {
+    const { form, updateFormField, submit } = useForm();
 
     const handleSubmit = async (e: Event) => {
         e.preventDefault();
@@ -71,16 +70,23 @@ const OrderForm: Component<{user: User}> = (props) => {
                     value={form.plan}
                     onChange={updateFormField("plan")}
                 >
-                    <option value="bronze">Brons</option>
-                    <option value="silver">Zilver</option>
-                    <option value="gold">Goud</option>
+                    <For each={Object.values(orderPlan)}>
+                        {(plan) => <option value={plan}>{plan}</option>}
+                    </For>
                 </select><br/>
+
+                <label for="date">Datum</label> <br/>
+                <input
+                    type={"date"}
+                    value={form.date}
+                    onChange={updateFormField("date")}
+                    // onInput={checkSchedule()}
+                /> <br/>
 
                 <label for="status">Spoedorder</label> <br/>
                 <input
                     type="checkbox"
-                    value={form.status}
-                    onChange={updateFormField("status")}
+                    onChange={updateFormField("isRush")}
                 /> <br/>
 
                 <input type={"submit"} value={"Maak Order"}/>
