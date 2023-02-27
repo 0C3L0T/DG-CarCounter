@@ -11,7 +11,6 @@ type FormFields = {
 const auth = getAuth();
 
 async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
-
     const data = {
         email: form.email,
         password: form.password,
