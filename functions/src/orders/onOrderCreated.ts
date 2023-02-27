@@ -13,7 +13,6 @@ export default functions.firestore
         const duration = calculateDuration(orderData);
 
         try {
-            // await batch.commit();
             await admin.firestore().runTransaction(async (transaction) => {
                 await scheduleOrder(transaction, orderId, duration);
             });
