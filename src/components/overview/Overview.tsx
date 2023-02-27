@@ -20,7 +20,6 @@ const Overview = () => {
     });
 
     return (
-        // we should check if the user has the right permissions to view this page
         <Show when={user()} fallback={
             <div>
                 <p>Log in om de overzichten te bekijken</p>

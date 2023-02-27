@@ -18,18 +18,16 @@ const Order: Component = () => {
 
     return (
         <Show
-            when={user()}
-            fallback={
+            when={user()} fallback={
                 <div>
                     <p>Log in om een order te plaatsen</p>
                     <Login/>
                 </div>
             }
-            keyed
-        >
+            keyed>
             <OrderForm/>
         </Show>
-    )
+    );
 }
 
 export default Order;
