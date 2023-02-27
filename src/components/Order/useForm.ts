@@ -114,31 +114,11 @@ const useForm = () => {
         }
     }
 
-    // function checkSchedule() {
-    //     return (event: Event) => {
-    //         const target = event.target as HTMLInputElement;
-    //         const date = new Date(target.value).toISOString().slice(0, 10);
-    //         if (date <= new Date().toISOString().slice(0, 10)) {
-    //             alert("Date must be in the future");
-    //         }
-    //
-    //         // check if date has open slot
-    //         const scheduleRef = doc(db, "schedule", date);
-    //         getDoc(scheduleRef).then((doc) => {
-    //             const data = doc.data();
-    //             if (data?.slots_available <= 0) {
-    //                 alert("No open slots for this date");
-    //             }
-    //         })
-    //     }
-    // }
-
     return {
         form,
         submit,
         clearField,
         updateFormField,
-        // checkSchedule,
     };
 }
 
