@@ -1,7 +1,9 @@
 import type { Component } from 'solid-js';
 import useForm from './useForm';
-
 import { User } from 'firebase/auth';
+import { For } from 'solid-js/web';
+
+import {orderBodyType, orderBrand} from "./orderTypes";
 
 const OrderForm: Component<{user: User}> = (props) => {
     const { form, updateFormField, submit } = useForm(props.user);
@@ -10,26 +12,27 @@ const OrderForm: Component<{user: User}> = (props) => {
         e.preventDefault();
         const result: HTMLElement | null = document.getElementById('result');
 
-        if (await submit(form)) {
-            result ? result.innerHTML = "Order is aangemaakt" : null;
-        } else {
-            result ? result.innerHTML = "Er is iets fout gegaan" : null;
-        }
+        const submitResult = await submit(form);
+        await submitResult.match(
+            (_: Boolean) => result ? result.innerHTML = "Order is aangemaakt" : null,
+            (err: Error) => result ? result.innerHTML = err.message : null
+        )
     }
 
     return (
-        // look at For: https://www.solidjs.com/docs/latest/api#for
         <div>
             <form onSubmit={handleSubmit} method="post">
                 <h1>Maak Order</h1>
 
                 <label for="brand">Merk</label> <br/>
-                <input
-                    type="text"
+                <select
                     value={form.brand}
                     onChange={updateFormField("brand")}
-                /> <br/>
-
+                >
+                    <For each={Object.values(orderBrand)}>
+                        {(brand) => <option value={brand}>{brand}</option>}
+                    </For>
+                </select><br/>
                 <label for="model">Model</label> <br/>
                 <input
                     type="text"
@@ -42,10 +45,9 @@ const OrderForm: Component<{user: User}> = (props) => {
                     value={form.bodyType}
                     onChange={updateFormField("bodyType")}
                 >
-                    <option value="hatchback">Hatchback</option>
-                    <option value="sedan">Sedan</option>
-                    <option value="coupe">Coupe</option>
-                    <option value="suv">SUV</option>
+                    <For each={Object.values(orderBodyType)}>
+                        {(bodyType) => <option value={bodyType}>{bodyType}</option>}
+                    </For>
                 </select><br/>
 
                 <label for="color">Kleur</label> <br/>

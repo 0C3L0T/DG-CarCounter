@@ -1,36 +1,16 @@
 import { createStore } from 'solid-js/store';
 import { User } from "firebase/auth";
 import { getFirestore, collection, addDoc, serverTimestamp} from "firebase/firestore";
+import { errAsync, okAsync, ResultAsync} from "neverthrow";
 
+import {orderBrand, orderBodyType, orderColor, orderPlan, orderStatus} from "./orderTypes";
 const db = getFirestore();
 
-enum orderStatus {
-    pending = 'pending',
-    urgent = 'urgent',
-    scheduled = 'scheduled',
-}
 
-enum orderPlan {
-    bronze = 'bronze',
-    silver = 'silver',
-    gold = 'gold',
-}
-
-enum orderColor {
-    black = 'black',
-    other = 'other',
-}
-
-enum orderBodyType {
-    sedan = 'sedan',
-    hatchback = 'hatchback',
-    suv = 'suv',
-   coupe = 'coupe',
-}
 
 
 type FormFields = {
-    brand: string;
+    brand: orderBrand;
     model: string;
     bodyType: orderBodyType;
     color: orderColor;
@@ -43,7 +23,7 @@ type FormFields = {
 };
 
 
-const submit = async (form: FormFields) => {
+async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
     const dataToSubmit = {
         brand: form.brand,
         model: form.model,
@@ -58,28 +38,31 @@ const submit = async (form: FormFields) => {
     }
 
     // form validation
-    if (
-        Object.values(dataToSubmit).some((value) => value === '')
-    ) {
-        return false;
+    if (Object.values(dataToSubmit).some((value) => value === '')) {
+        return errAsync(new Error('All fields are required'));
+    } else if (dataToSubmit.brand == orderBrand.other) {
+        return errAsync(new Error('Please select a brand'));
+    } else if (dataToSubmit.bodyType == orderBodyType.other) {
+        return errAsync(new Error('Please select a body type'));
     }
 
-    try {
-        const docRef = await addDoc(collection(db, "orders"), dataToSubmit);
-        console.log("Document written with ID: ", docRef.id);
-        return true;
-    } catch (e) {
-        console.error("Error adding document: ", e);
-        return false;
-    }
+    addDoc(collection(db, "orders"), dataToSubmit)
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+        }).catch((error) => {
+                return errAsync(new Error(error.message));
+            }
+    )
+
+    return okAsync(true);
 }
 
 
 const useForm = (user: User) => {
     const [form, setForm] = createStore<FormFields>({
-        brand: '',
+        brand: orderBrand.other,
         model: '',
-        bodyType: orderBodyType.sedan,
+        bodyType: orderBodyType.other,
         color: orderColor.black,
         licensePlate: '',
         plan: orderPlan.bronze,
