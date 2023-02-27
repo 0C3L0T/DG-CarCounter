@@ -36,6 +36,7 @@ const AllOrders: Component = () => {
                             <th>Kenteken</th>
                             <th>Behandeling</th>
                             <th>Status</th>
+                            <th>Betaald</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +49,7 @@ const AllOrders: Component = () => {
                                 <td>{order.licensePlate}</td>
                                 <td>{order.plan}</td>
                                 <td>{order.status}</td>
+                                <td>{order.paid ? 'ja' : 'nee'}</td>
                             </tr>
                         ))}
                     </tbody>
