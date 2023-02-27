@@ -53,8 +53,6 @@ async function getNextAvailableSlot(schedules: { [date: string]: Schedule }): Pr
 }
 
 export default async function scheduleOrder(transaction: admin.firestore.Transaction, orderId: string, duration: number) {
-    console.log("scheduling order...");
-
     const duration_copy = duration;
 
     const orderRef = admin.firestore().collection("orders").doc(orderId);
@@ -71,7 +69,6 @@ export default async function scheduleOrder(transaction: admin.firestore.Transac
     const scheduleQuery = await scheduleRef.limit(1).get();
     if (!scheduleQuery.empty) {
         const lastSchedule = scheduleQuery.docs[0];
-        console.log("last schedule: ", lastSchedule.data());
         schedules[lastSchedule.id] = new Schedule(lastSchedule.data().slots, lastSchedule.data().slots_available);
     } else {
         // if there are no schedules, create a new one
