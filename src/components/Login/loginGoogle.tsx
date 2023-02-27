@@ -1,10 +1,10 @@
 import type { Component } from 'solid-js';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 
+const auth = getAuth();
 
 const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
-    const auth = getAuth();
 
     signInWithPopup(auth, provider)
         .then((result) => {
@@ -24,7 +24,7 @@ const signInWithGoogle = () => {
         });
 }
 
-const Login: Component = () => {
+const LoginGoogle: Component = () => {
     return (
         <div>
             <button onClick={signInWithGoogle}>Sign in with Google</button>
@@ -32,4 +32,4 @@ const Login: Component = () => {
     );
 };
 
-export default Login;
+export default LoginGoogle;

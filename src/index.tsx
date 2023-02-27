@@ -29,7 +29,7 @@ connectAuthEmulator(auth, 'http://localhost:9099');
 
 const Order = lazy(() => import('./components/Order/Order'));
 const Overview = lazy(() => import('./components/overview/Overview'));
-const Login = lazy(() => import('./components/Login'));
+const Login = lazy(() => import('./components/Login/Login'));
 const Home = lazy(() => import('./components/Home'));
 
 
