@@ -80,7 +80,6 @@ const OrderForm: Component = () => {
                     type={"date"}
                     value={form.date}
                     onChange={updateFormField("date")}
-                    // onInput={checkSchedule()}
                 /> <br/>
 
                 <label for="status">Spoedorder</label> <br/>
