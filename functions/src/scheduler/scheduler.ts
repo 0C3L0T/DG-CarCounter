@@ -1,19 +1,5 @@
-// create documents for each day of the week that contain 10 slots
-// whenever an order is created, check if there is a slot available
-// if there is a slot available, add the order to the slot
-// if there is no slot available, add the order to the next day
-
 import * as admin from "firebase-admin";
 
-// docs: https://firebase.google.com/docs/functions/callable#web-version-9_2
-
-// document outline:
-/*
-* - Day, timestamp
-* - Slots_available, number (default 10)
-* - Array of 10 slots, each containing:
-*       -order_id, string
-* */
 
 class Schedule {
     slots: string[];
