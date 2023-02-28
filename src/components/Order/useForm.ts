@@ -45,7 +45,6 @@ async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
 
     // form validation
     if (Object.values(formData).some((value) => value === '')) {
-        // skip
         return errAsync(new Error('All fields are required'));
     } else if (formData.brand == orderBrand.other) {
         return errAsync(new Error('Please select a brand'));
