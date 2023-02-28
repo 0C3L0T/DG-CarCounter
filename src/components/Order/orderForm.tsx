@@ -5,7 +5,7 @@ import { For } from 'solid-js/web';
 import {orderBodyType, orderBrand, orderPlan} from "./orderTypes";
 
 const OrderForm: Component = () => {
-    const { form, updateFormField, submit } = useForm();
+    const { form, updateFormField, submit, clearForm } = useForm();
 
     const handleSubmit = async (e: Event) => {
         e.preventDefault();
@@ -16,6 +16,9 @@ const OrderForm: Component = () => {
             (_: Boolean) => result ? result.innerHTML = "Order is aangemaakt" : null,
             (err: Error) => result ? result.innerHTML = err.message : null
         )
+
+        // clear form
+        clearForm();
     }
 
     return (

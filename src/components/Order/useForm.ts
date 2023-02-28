@@ -85,6 +85,9 @@ async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
             }
     )
 
+    // clear the fields
+
+
     return okAsync(true);
 }
 
@@ -111,6 +114,20 @@ function useForm() {
         setForm({[fieldName]: ''});
     }
 
+    const clearForm = () => {
+        setForm({
+            brand: orderBrand.other,
+            model: '',
+            bodyType: orderBodyType.other,
+            color: orderColor.black,
+            licensePlate: '',
+            plan: orderPlan.bronze,
+            // get tomorrow's date as iso string
+            date: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
+            isRush: false,
+        });
+    }
+
     const updateFormField = (fieldName: keyof FormFields) => {
         return (event: Event) => {
             const target = event.target as HTMLInputElement;
@@ -127,6 +144,7 @@ function useForm() {
         submit,
         clearField,
         updateFormField,
+        clearForm,
     };
 }
 
