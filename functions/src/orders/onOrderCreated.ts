@@ -1,3 +1,7 @@
+/***
+ * This file is triggered when a new order is created.
+ * It calculates the duration of the order and schedules it with a transaction.
+ */
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 
@@ -13,15 +17,12 @@ export default functions.firestore
 
         const duration = calculateDuration(orderData);
 
-        try {
-            await admin.firestore().runTransaction(async (transaction) => {
-                await scheduleOrder(transaction, orderId, orderStartDate, duration);
-            });
-
-            await snap.ref.set({status: "scheduled"}, {merge: true});
-        } catch (e) {
-            console.error(e);
-        }
-
-        return;
+        await admin.firestore().runTransaction(async (transaction) => {
+            await scheduleOrder(transaction, orderId, orderStartDate, duration);
+        }).then(() => {
+            functions.logger.log("Order scheduled successfully.");
+            return snap.ref.set({status: "scheduled"}, {merge: true});
+        }).catch((e) => {
+            return functions.logger.error("Error scheduling order: ", e);
+        });
     });

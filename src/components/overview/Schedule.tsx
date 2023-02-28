@@ -15,10 +15,7 @@ const Schedule: Component<{date: Date}> = (props) => {
         const data = scheduleSnapshot.data();
         const _orderIds: string[] = [];
         data?.slots?.map((slot: DocumentData) => {
-            // if (slot.toString() != "") {
-            //     _orderIds.push(slot.toString());
             _orderIds.push(slot.toString());
-            // }
         });
         setOrderIds(_orderIds);
     });

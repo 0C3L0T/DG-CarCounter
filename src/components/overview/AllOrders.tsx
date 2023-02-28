@@ -10,6 +10,7 @@ const AllOrders: Component = () => {
     const [orders, setOrders] = createSignal<DocumentData[]>([]);
     const orderReference = collection(db, "orders");
 
+    // runs every time a new snapshot is available
     onSnapshot(orderReference, (orderSnapshot) => {
         const orders: DocumentData[] = [];
         orderSnapshot.forEach((doc) => {

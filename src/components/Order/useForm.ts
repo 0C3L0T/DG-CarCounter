@@ -29,6 +29,9 @@ type BackendFormFields = {
 
 
 async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
+    /***
+     * submit the order form, do form validation and save the order to the database
+     */
     const formData = {
         brand: form.brand,
         model: form.model,
@@ -86,7 +89,12 @@ async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
 }
 
 
-const useForm = () => {
+function useForm() {
+    /***
+     * This hook handles the form state and form submission
+     * It uses the solid store to keep track of the form state
+     * @returns {form, submit, clearField, updateFormField}
+     */
     const [form, setForm] = createStore<FormFields>({
         brand: orderBrand.other,
         model: '',

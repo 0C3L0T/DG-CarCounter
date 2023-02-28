@@ -11,6 +11,13 @@ type FormFields = {
 const auth = getAuth();
 
 async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
+    /***
+     * submit the login form, check if the user exists and if the password is correct
+     * then log in the user
+     * @param form the form data as a FormFields object
+     * @returns a ResultAsync object
+     */
+
     const data = {
         email: form.email,
         password: form.password,
@@ -30,21 +37,31 @@ async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
             console.log(user)
         })
         .catch((error) => {
-            const errorCode = error.code;
-            return errAsync(new Error(error.message + ' ' + errorCode));
+            return errAsync(new Error(error.message + ' ' + error.code));
         });
 
     return okAsync(true);
 }
 
 function useForm() {
+    /***
+     * A custom hook to handle the login form,
+     * it uses the solid-js/store to manage the form state
+     * @returns an object with the form state, a function to update the form state,
+     * a function to submit the form and a function to set the form state
+     */
+
     const [form, setForm] = createStore<FormFields>({
         email: '',
         password: '',
     });
-
-
+    
     function updateFormField(fieldName: keyof FormFields) {
+        /***
+         * A function to update the form state
+         * @param fieldName the name of the field to update
+         * @returns a function that takes an event and updates the form state
+         */
         return (event: Event) => {
             const target = event.target as HTMLInputElement;
             if (target.type === 'checkbox') {
