@@ -17,7 +17,6 @@ const OrderForm: Component = () => {
             (err: Error) => result ? result.innerHTML = err.message : null
         )
 
-        // clear form
         clearForm();
     }
 
