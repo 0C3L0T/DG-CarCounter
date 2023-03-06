@@ -101,9 +101,16 @@ export default async function scheduleOrder(
     const schedules = await buildScheduleDict();
 
     // now we can use the schedules object to add new orders to the schedule
+    let lastScheduleDate: null | string = null
     while (duration > 0) {
         // get the next available slot
         const [date, slot] = await getNextAvailableSlotAfter(schedules, orderStartDate);
+
+        // if it is the last slot we schedule, save the date so we can add is to the order
+        // as the delivery date
+        if (duration === 1) {
+            lastScheduleDate = date;
+        }
 
         // add the order to the slot and store in intermediate object
         if (schedules[date]) {
@@ -131,5 +138,6 @@ export default async function scheduleOrder(
     }
 
     // update the order status
-    transaction.update(orderRef, {status: "scheduled", duration: duration_copy});
+    transaction.update(orderRef,
+        {status: "scheduled", duration: duration_copy, endDate: lastScheduleDate});
 }
