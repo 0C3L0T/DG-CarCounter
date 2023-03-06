@@ -84,9 +84,6 @@ async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
             }
     )
 
-    // clear the fields
-
-
     return okAsync(true);
 }
 

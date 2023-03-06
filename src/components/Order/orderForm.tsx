@@ -13,11 +13,12 @@ const OrderForm: Component = () => {
 
         const submitResult = await submit(form);
         await submitResult.match(
-            (_: Boolean) => result ? result.innerHTML = "Order is aangemaakt" : null,
-            (err: Error) => result ? result.innerHTML = err.message : null
+            (_: Boolean) => {
+                result ? result.innerHTML = "Order is aangemaakt" : null;
+                clearForm();
+            },
+            (err: Error) => {result ? result.innerHTML = err.message : null}
         )
-
-        clearForm();
     }
 
     return (
@@ -80,7 +81,7 @@ const OrderForm: Component = () => {
                 <label for="date">Datum</label> <br/>
                 <input
                     type={"date"}
-                    value={form.date}
+                    value={form.date} //TODO: fix locale date, should be dd-mm-yyyy
                     onChange={updateFormField("date")}
                 /> <br/>
 
