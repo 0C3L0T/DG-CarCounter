@@ -4,6 +4,7 @@ import {getAuth, onAuthStateChanged, User} from "firebase/auth";
 const AllOrders = lazy(() => import('./AllOrders'));
 const Schedule = lazy(() => import('./Schedule'));
 const Login = lazy(() => import('../Login/Login'));
+const Delivery = lazy(() => import('./Delivery'));
 
 const auth = getAuth();
 
@@ -30,6 +31,7 @@ const Overview = () => {
                 <AllOrders/>
                 <Schedule date={today}/>
                 <Schedule date={tomorrow}/>
+                <Delivery/>
             </div>
         </Show>
     );
