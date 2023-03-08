@@ -85,7 +85,7 @@ const OrderForm: Component = () => {
                     onChange={updateFormField("date")}
                 /> <br/>
 
-                <label for="status">Spoedorder</label> <br/>
+                <label for="isRush">Spoedorder</label> <br/>
                 <input
                     type="checkbox"
                     onChange={updateFormField("isRush")}
