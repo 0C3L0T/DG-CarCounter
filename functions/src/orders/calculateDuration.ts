@@ -26,10 +26,6 @@ export default function CalculateDuration(order: DocumentData): number {
             duration += 1;
         }
 
-        if (order.isRush) {
-            duration -= 1;
-        }
-
         return duration;
     } else {
         return -1

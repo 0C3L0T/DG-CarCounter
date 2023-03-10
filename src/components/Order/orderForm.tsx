@@ -2,7 +2,9 @@ import type { Component } from 'solid-js';
 import useForm from './useForm';
 import { For } from 'solid-js/web';
 
-import {orderBodyType, orderBrand, orderPlan} from "./orderTypes";
+import { orderBodyType, orderBrand, orderPlan } from "./orderTypes";
+
+import './orderForm.scss';
 
 const OrderForm: Component = () => {
     const { form, updateFormField, submit, clearForm } = useForm();

@@ -13,7 +13,7 @@ export default functions.firestore
     .onCreate(async (snap, context) => {
         const orderData = snap.data();
         const orderId = context.params.orderId;
-        const orderStartDate = orderData.startDate; // iso date string
+        const orderStartDate = orderData.date; // iso date string
 
         const duration = calculateDuration(orderData);
 
