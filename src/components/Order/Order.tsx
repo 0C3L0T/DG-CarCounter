@@ -7,6 +7,8 @@ const Login = lazy(() => import('../Login/Login'));
 
 const auth = getAuth();
 
+import './order.scss';
+
 const Order: Component = () => {
     const [user, setUser] = createSignal<User|null>(null);
 

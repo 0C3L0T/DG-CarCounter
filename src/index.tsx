@@ -1,6 +1,6 @@
 /* @refresh reload */
 import { render } from 'solid-js/web';
-import {Router, Route, Routes} from '@solidjs/router';
+import { Router, Route, Routes } from '@solidjs/router';
 
 import { lazy } from 'solid-js';
 
@@ -32,6 +32,7 @@ const Overview = lazy(() => import('./components/overview/Overview'));
 const Login = lazy(() => import('./components/Login/Login'));
 const Home = lazy(() => import('./components/Home'));
 
+import './assets/global.scss';
 
 render(
     () => (

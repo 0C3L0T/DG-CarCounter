@@ -1,0 +1,11 @@
+@import 'colours';
+
+h1 {
+  font-family: $textFont;
+  color: $textPrimaryDark;
+}
+
+body {
+  background-color: $backgroundDarkMain;
+  color: $textNeutralDark;
+}

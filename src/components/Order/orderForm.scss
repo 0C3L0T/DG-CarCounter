@@ -1,0 +1,216 @@
+@import '../../assets/colours';
+
+.order-form {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.order-form__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  width: 20rem;
+}
+
+.order-form__label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  font-family: $textFont;
+}
+
+.order-form__input {
+  width: 20rem;
+  height: 2rem;
+  margin: 0.125rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  input {
+    width: 10rem;
+    height: 1.5rem;
+    padding: 0.125rem 0.5rem;
+    border: 0.125rem solid $accentDark;
+    background-color: $backgroundLightMain;
+    border-radius: 0.5rem;
+    font-family: $textFont;
+    font-size: 1rem;
+    color: $textNeutralLight;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: none;
+      border: 0.125rem solid $primaryMain;
+    }
+  }
+
+    input[type=checkbox] {
+      position: relative;
+      margin-left: auto;
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 0.125rem;
+    }
+
+    input[type=checkbox]:before {
+      opacity: 1;
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 0.125rem solid $accentDark;
+      border-radius: 0.5rem;
+      background-color: $backgroundLightMain;
+      top: -0.125rem;
+      left: -0.125rem;
+    }
+
+    input[type=checkbox]:focus:before {
+      outline: none;
+      border: 0.125rem solid $primaryMain;
+    }
+
+    input[type=checkbox]:checked:before {
+      background-color: $accentDark;
+    }
+
+    input[type=checkbox]:checked:after {
+      opacity: 1;
+      content: "";
+      display: block;
+      width: 0.5rem;
+      height: 1rem;
+      border: solid $textNeutralDark;
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      position: absolute;
+      top: 0.025rem;
+      left: 0.4rem;
+    }
+
+  .order-form__number-plate {
+    width: 11rem;
+    height: 1.75rem;
+    display: flex;
+    flex-direction: row;
+    border: 0.125rem solid black;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    &--NL {
+      width: 1rem;
+      height: 100%;
+      background-color: $numberPlateLeft;
+      color: $textNeutralDark;
+      font-family: $textFont;
+      font-size: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        margin: 0.5rem 0 0 0;
+      }
+    }
+
+    input {
+      background-color: $numberPlateRight;
+      width: 9rem;
+      flex-grow: 1;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border: none;
+      border-radius: 0;
+
+      &:focus-visible {
+        border: none;
+      }
+    }
+  }
+
+  .order-form__select-box {
+    width: 11rem;
+    height: 1.75rem;
+    border: 0.125rem solid $accentDark;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    &:focus-within {
+      border: 0.125rem solid $primaryMain;
+    }
+
+    select {
+      width: 100%;
+      height: 1.75rem;
+      padding: 0.125rem 0.5rem;
+      border: none;
+      background-color: $backgroundLightMain;
+      font-family: $textFont;
+      font-size: 1rem;
+      color: $textNeutralLight;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: none;
+        border: none;
+      }
+    }
+  }
+}
+
+.order-form__submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  margin-top: 2rem;
+
+  input {
+    width: 10rem;
+    height: 2rem;
+    margin: 0.125rem;
+    border: 0.125rem solid $accentMain;
+    background-color: $accentMain;
+    border-radius: 0.5rem;
+    font-family: $textFont;
+    font-size: 1rem;
+    color: $textNeutralDark;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $accentDark;
+      border-color: $accentDark;
+      color: $textNeutralDark;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 0.125rem solid $primaryMain;
+    }
+  }
+}
