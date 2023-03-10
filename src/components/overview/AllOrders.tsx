@@ -37,6 +37,8 @@ const AllOrders: Component = () => {
                             <th>Kenteken</th>
                             <th>Behandeling</th>
                             <th>Status</th>
+                            <th>Begin</th>
+                            <th>Eind</th>
                             <th>Duur(in tijdslots)</th>
                             <th>Betaald</th>
                         </tr>
@@ -51,6 +53,8 @@ const AllOrders: Component = () => {
                                 <td>{order.licensePlate}</td>
                                 <td>{order.plan}</td>
                                 <td>{order.status}</td>
+                                <td>{order.date}</td>
+                                <td>{order.endDate}</td>
                                 <td>{order.duration}</td>
                                 <td>{order.paid ? 'ja' : 'nee'}</td>
                             </tr>
