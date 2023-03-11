@@ -1,22 +1,74 @@
 import type { Component } from 'solid-js';
-import {createSignal, Show} from 'solid-js';
+import {createSignal, Show, For} from 'solid-js';
 import { getFirestore, collection, onSnapshot} from "firebase/firestore";
-import type { DocumentData } from "firebase/firestore";
+import type {DocumentReference} from "firebase/firestore";
+import { getFunctions, httpsCallable} from "firebase/functions";
+
 
 const db = getFirestore();
+const functions = getFunctions();
+const removeOrder = httpsCallable(functions, 'removeOrder');
 
+
+function removeOrderWrapper(orderRef: DocumentReference) {
+    // create a popup to confirm the deletion
+    if (confirm("Weet je zeker dat je deze order wilt verwijderen?")) {
+        removeOrder({orderId: orderRef.id}).then(() => {
+            console.log("Order deleted");
+        }).catch((error) => {
+            console.log(error);
+        });
+    } else {
+        return null;
+    }
+}
+
+const OrderRow: Component<{orderRef: DocumentReference}> = (props) => {
+    const orderRef = props.orderRef;
+    return () => {
+        const [order, setOrder] = createSignal<any>(null);
+        onSnapshot(orderRef, (orderSnapshot) => {
+            setOrder(orderSnapshot.data());
+        });
+
+        return (
+            <tr>
+                <td>{order()?.brand}</td>
+                <td>{order()?.model}</td>
+                <td>{order()?.bodyType}</td>
+                <td>{order()?.color}</td>
+                <td>{order()?.licensePlate}</td>
+                <td>{order()?.plan}</td>
+                <td>{order()?.status}</td>
+                <td>{order()?.date}</td>
+                <td>{order()?.endDate}</td>
+                <td>{order()?.duration}</td>
+                <td>{order()?.paid ? 'ja' : 'nee'}</td>
+                <td>{order()?.isRush ? 'ja' : 'nee'}</td>
+                <td>
+                    <button
+                        onClick={() => {
+                            removeOrderWrapper(orderRef);
+                        }}>
+                        Verwijder
+                    </button>
+                </td>
+            </tr>
+        );
+    };
+}
 
 const AllOrders: Component = () => {
-    const [orders, setOrders] = createSignal<DocumentData[]>([]);
+    const [orderRefs, setOrderRefs] = createSignal<DocumentReference[]>([]);
     const orderReference = collection(db, "orders");
 
     // runs every time a new snapshot is available
     onSnapshot(orderReference, (orderSnapshot) => {
-        const orders: DocumentData[] = [];
+        const orders: DocumentReference[] = [];
         orderSnapshot.forEach((doc) => {
-            orders.push(doc.data());
+            orders.push(doc.ref);
         });
-        setOrders(orders);
+        setOrderRefs(orders);
     });
 
 
@@ -24,7 +76,7 @@ const AllOrders: Component = () => {
         <div>
             <h1>Alle Orders</h1>
             <Show
-                when={orders().length != 0}
+                when={orderRefs().length != 0}
                 fallback={<div>Er zijn nog geen orders</div>}
                 keyed>
                 <table>
@@ -41,24 +93,15 @@ const AllOrders: Component = () => {
                             <th>Eind</th>
                             <th>Duur(in tijdslots)</th>
                             <th>Betaald</th>
+                            <th>Spoed</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {orders().map((order, __created_at) => (
-                            <tr>
-                                <td>{order.brand}</td>
-                                <td>{order.model}</td>
-                                <td>{order.bodyType}</td>
-                                <td>{order.color}</td>
-                                <td>{order.licensePlate}</td>
-                                <td>{order.plan}</td>
-                                <td>{order.status}</td>
-                                <td>{order.date}</td>
-                                <td>{order.endDate}</td>
-                                <td>{order.duration}</td>
-                                <td>{order.paid ? 'ja' : 'nee'}</td>
-                            </tr>
-                        ))}
+                        <For each={orderRefs()}>
+                            {(orderRef) => (
+                                <OrderRow orderRef={orderRef} />
+                            )}
+                        </For>
                     </tbody>
                 </table>
         </Show>
