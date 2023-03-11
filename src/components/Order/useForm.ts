@@ -48,8 +48,6 @@ async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
         return errAsync(new Error('All fields are required'));
     } else if (formData.brand == orderBrand.other) {
         return errAsync(new Error('Please select a brand'));
-    } else if (formData.bodyType == orderBodyType.other) {
-        return errAsync(new Error('Please select a body type'));
     }
 
     // check date
