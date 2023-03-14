@@ -4,7 +4,6 @@ import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc} from "f
 import { errAsync, okAsync, ResultAsync} from "neverthrow";
 
 import {orderBrand, orderBodyType, orderColor, orderPlan, orderStatus} from "./orderTypes";
-import {firestore} from "firebase-admin";
 const db = getFirestore();
 const auth = getAuth();
 
@@ -20,7 +19,7 @@ type FormFields = {
 };
 
 type BackendFormFields = {
-    createdAt: firestore.Timestamp;
+    createdAt: unknown;
     userId: string;
     status: orderStatus;
     duration: number;
@@ -66,7 +65,7 @@ async function submit(form: FormFields): Promise<ResultAsync<Boolean, Error>> {
 
     // all the data that the user should not be able to change
     const backendData: BackendFormFields = {
-        createdAt: serverTimestamp() as firestore.Timestamp,
+        createdAt: serverTimestamp(),
         userId: auth.currentUser!.uid,
         status: orderStatus.pending,
         duration: -1,
