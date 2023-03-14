@@ -1,0 +1,36 @@
+@import '../../assets/colours.scss';
+
+.login-google {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  button {
+    width: 10rem;
+    height: 2rem;
+    margin: 0.125rem;
+    border: 0.125rem solid $accentMain;
+    background-color: $accentMain;
+    border-radius: 0.5rem;
+    font-family: $textFont;
+    font-size: 1rem;
+    color: $textNeutralDark;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $accentDark;
+      border-color: $accentDark;
+      color: $textNeutralDark;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 0.125rem solid $primaryMain;
+    }
+  }
+}

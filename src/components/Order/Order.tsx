@@ -21,6 +21,7 @@ const Order: Component = () => {
     return (
         <Show
             when={user()} fallback={
+                // TODO: It makes way more sense to just use your Login component here
                 <div>
                     <p>Log in om een order te plaatsen</p>
                     <Login/>

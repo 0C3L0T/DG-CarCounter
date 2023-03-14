@@ -1,6 +1,8 @@
 import type { Component } from 'solid-js';
 import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 
+import './loginGoogle.scss';
+
 const auth = getAuth();
 
 const signInWithGoogle = () => {
@@ -26,7 +28,7 @@ const signInWithGoogle = () => {
 
 const LoginGoogle: Component = () => {
     return (
-        <div>
+        <div class="login-google">
             <button onClick={signInWithGoogle}>Sign in with Google</button>
         </div>
     );

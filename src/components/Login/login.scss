@@ -1,0 +1,23 @@
+@import '../../assets/colours';
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+
+  font-family: $textFont;
+  font-size: 1rem;
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    margin-bottom: 10rem;
+  }
+}

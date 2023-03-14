@@ -1,0 +1,56 @@
+@import '../assets/colours';
+
+.home {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__buttons {
+    display: flex;
+    width: 75vw;
+    margin: 2rem 12.5vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  &__button {
+    width: 20vw;
+    height: 10rem;
+    background-color: $accentDark;
+    border-radius: 1rem;
+    color: $textNeutralLight;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: $textFont;
+    color: $textNeutralDark;
+
+    &:hover {
+      background-color: $accentMain;
+      color: $textHoverLight;
+    }
+  }
+
+  // If the screen width is less than 768px, change the flex-direction to column
+  @media (max-width: 1024px) {
+    &__buttons {
+      margin-top: 2rem;
+      flex-direction: column;
+    }
+
+    &__button {
+      width: 75vw;
+      height: 10rem;
+      max-height: 17.5vh;
+      min-height: 5rem;
+      margin: 1rem 0;
+    }
+  }
+}

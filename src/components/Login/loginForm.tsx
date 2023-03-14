@@ -1,6 +1,8 @@
 import type { Component } from 'solid-js';
 import useForm from "./useForm";
 
+import './loginForm.scss';
+
 const LoginForm: Component = () => {
     const { form, updateFormField, submit } = useForm();
 
@@ -16,23 +18,29 @@ const LoginForm: Component = () => {
     }
 
     return (
-        <div>
+        <div class="login-form">
             <form onSubmit={handleSubmit} method="post">
-                <label for="email">Email</label> <br/>
-                <input
-                    type="text"
-                    value={form.email}
-                    onChange={updateFormField("email")}
-                /> <br/>
+                <div class="login-form__input">
+                    <label for="email" class="login-form__label">Email</label> <br/>
+                    <input
+                        type="text"
+                        value={form.email}
+                        onChange={updateFormField("email")}
+                    />
+                </div>
 
-                <label for="password">Password</label> <br/>
-                <input
-                    type="password"
-                    value={form.password}
-                    onChange={updateFormField("password")}
-                /> <br/>
+                <div class="login-form__input">
+                    <label for="password" class="login-form__label">Password</label> <br/>
+                    <input
+                        type="password"
+                        value={form.password}
+                        onChange={updateFormField("password")}
+                    />
+                </div>
 
-                <button type="submit">Login</button>
+                <div class="login-form__submit">
+                    <button type="submit">Login</button>
+                </div>
             </form>
             <div id="result"></div>
         </div>
