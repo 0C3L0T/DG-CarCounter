@@ -2,7 +2,6 @@ import {lazy, Show, createSignal} from "solid-js";
 import {getAuth, onAuthStateChanged, User} from "firebase/auth";
 
 const AllOrders = lazy(() => import('./AllOrders'));
-const Schedule = lazy(() => import('./Schedule'));
 const Login = lazy(() => import('../Login/Login'));
 const Delivery = lazy(() => import('./Delivery'));
 
@@ -10,9 +9,6 @@ const auth = getAuth();
 
 const Overview = () => {
     const [user, setUser] = createSignal<User|null>(null);
-    const today = new Date();
-    const tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + 1);
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -29,8 +25,6 @@ const Overview = () => {
         } keyed>
             <div>
                 <AllOrders/>
-                <Schedule date={today}/>
-                <Schedule date={tomorrow}/>
                 <Delivery/>
             </div>
         </Show>

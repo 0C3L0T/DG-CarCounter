@@ -7,7 +7,7 @@ import {For} from "solid-js/web";
 const db = getFirestore()
 
 
-const Schedule: Component<{date: Date}> = (props) => {
+const ScheduleDay: Component<{date: Date}> = (props) => {
     const scheduleRef = doc(db, "schedule", props.date.toISOString().slice(0, 10));
 
     const [orderIds, setOrderIds] = createSignal<string[]>([]);
@@ -79,4 +79,4 @@ const Schedule: Component<{date: Date}> = (props) => {
     );
 }
 
-export default Schedule;
+export default ScheduleDay;
