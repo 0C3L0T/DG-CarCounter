@@ -29,8 +29,8 @@ initializeApp(firebaseConfig);
 
 const Order = lazy(() => import('./components/Order/Order'));
 const Overview = lazy(() => import('./components/overview/Overview'));
-const Login = lazy(() => import('./components/Login/Login'));
 const Home = lazy(() => import('./components/Home'));
+const Schedule = lazy(() => import('./components/Schedule/Schedule'));
 
 import './assets/global.scss';
 
@@ -39,9 +39,9 @@ render(
         <Router>
             <Routes>
                 <Route path="/" component={Home} />
-                <Route path="/login" component={Login} />
                 <Route path="/order" component={Order} />
                 <Route path="/overview" component={Overview} />
+                <Route path="/schedule" component={Schedule} />
             </Routes>
         </Router>
     ),
