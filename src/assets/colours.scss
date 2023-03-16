@@ -10,17 +10,42 @@ $warningMain: #bb1313;
 
 $backgroundDarkMain: $neutralMain;
 $backgroundDarkLighter: $neutralLighter;
-$backgroundLightMain: #FFFFFF;
+$backgroundLightStatic: #FFFFFF;
+$backgroundLightMain: $backgroundLightStatic;
 $backgroundLightLighter: #F2F2F2;
 
-$textNeutralDark: #FFFFFF;
-$textPrimaryDark: $primaryMain;
-$textNeutralLight: $neutralMain;
-$textPrimaryLight: $primaryMain;
-$textHoverDark: #d2d8f6;
-$textHoverLight: $accentDark;
+$textNeutralDarkStatic: #FFFFFF;
+$textPrimaryDarkStatic: $primaryMain;
+$textHoverDarkStatic: #d2d8f6;
+
+$textNeutralDark: $textHoverDarkStatic;
+$textPrimaryDark: $textPrimaryDarkStatic;
+$textHoverDark: $textHoverDarkStatic;
+
+$textNeutralLightStatic: $neutralMain;
+$textPrimaryLightStatic: $primaryMain;
+$textHoverLightStatic: $accentDark;
+$textNeutralLight: $textNeutralLightStatic;
+$textPrimaryLight: $textPrimaryLightStatic;
+$textHoverLight: $textHoverLightStatic;
 
 $textFont: Fira Sans, sans-serif;
 
 $numberPlateLeft: rgb(59, 83, 146);
 $numberPlateRight: rgb(218, 185, 54);
+
+// Light theme overrides
+// Media preference for dark theme
+@media (prefers-color-scheme: light) {
+  $backgroundDarkMain: #FFFFFF;
+  $backgroundDarkLighter: #F2F2F2;
+  $backgroundLightMain: $neutralMain;
+  $backgroundLightLighter: $neutralLighter;
+
+  $textNeutralDark: $textNeutralLightStatic;
+  $textPrimaryDark: $textPrimaryLightStatic;
+  $textNeutralLight: $textNeutralDarkStatic;
+  $textPrimaryLight: $textPrimaryDarkStatic;
+  $textHoverDark: $textHoverLightStatic;
+  $textHoverLight: $textHoverDarkStatic;
+}

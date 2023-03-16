@@ -41,11 +41,11 @@
     height: 1.5rem;
     padding: 0.125rem 0.5rem;
     border: 0.125rem solid $accentDark;
-    background-color: $backgroundLightMain;
+    background-color: $backgroundLightStatic;
     border-radius: 0.5rem;
     font-family: $textFont;
     font-size: 1rem;
-    color: $textNeutralLight;
+    color: $textNeutralLightStatic;
 
     &:focus {
       outline: none;
@@ -74,7 +74,7 @@
       height: 1.5rem;
       border: 0.125rem solid $accentDark;
       border-radius: 0.5rem;
-      background-color: $backgroundLightMain;
+      background-color: $backgroundLightStatic;
       top: -0.125rem;
       left: -0.125rem;
     }
@@ -94,7 +94,7 @@
       display: block;
       width: 0.5rem;
       height: 1rem;
-      border: solid $textNeutralDark;
+      border: solid $textNeutralDarkStatic;
       border-width: 0 2px 2px 0;
       -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
@@ -117,7 +117,7 @@
       width: 1rem;
       height: 100%;
       background-color: $numberPlateLeft;
-      color: $textNeutralDark;
+      color: $textNeutralDarkStatic;
       font-family: $textFont;
       font-size: 0.5rem;
       display: flex;
@@ -161,10 +161,10 @@
       height: 1.75rem;
       padding: 0.125rem 0.5rem;
       border: none;
-      background-color: $backgroundLightMain;
+      background-color: $backgroundLightStatic;
       font-family: $textFont;
       font-size: 1rem;
-      color: $textNeutralLight;
+      color: $textNeutralLightStatic;
 
       &:focus {
         outline: none;
@@ -198,12 +198,12 @@
     border-radius: 0.5rem;
     font-family: $textFont;
     font-size: 1rem;
-    color: $textNeutralDark;
+    color: $textNeutralDarkStatic;
     cursor: pointer;
 
     &:hover {
       background-color: $accentMain;
-      color: $textNeutralDark;
+      color: $textNeutralDarkStatic;
     }
 
     &:focus {

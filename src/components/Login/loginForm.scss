@@ -31,11 +31,11 @@
     height: 1.5rem;
     padding: 0.125rem 0.5rem;
     border: 0.125rem solid $accentDark;
-    background-color: $backgroundLightMain;
+    background-color: $backgroundLightStatic;
     border-radius: 0.5rem;
     font-family: $textFont;
     font-size: 1rem;
-    color: $textNeutralLight;
+    color: $textNeutralLightStatic;
 
     &:focus {
       outline: none;
@@ -66,13 +66,13 @@
     border-radius: 0.5rem;
     font-family: $textFont;
     font-size: 1rem;
-    color: $textNeutralDark;
+    color: $textNeutralDarkStatic;
     cursor: pointer;
 
     &:hover {
       background-color: $accentDark;
       border-color: $accentDark;
-      color: $textNeutralDark;
+      color: $textNeutralDarkStatic;
     }
 
     &:focus {

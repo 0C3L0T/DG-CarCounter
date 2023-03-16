@@ -23,18 +23,17 @@
     height: 10rem;
     background-color: $accentDark;
     border-radius: 1rem;
-    color: $textNeutralLight;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 600;
     font-family: $textFont;
-    color: $textNeutralDark;
+    color: $textNeutralDarkStatic;
 
     &:hover {
       background-color: $accentMain;
-      color: $textHoverLight;
+      color: $textHoverLightStatic;
     }
   }
 
