@@ -1,19 +1,26 @@
-@import '../../assets/colours.scss';
+@import "../../assets/colours.scss";
 
 .schedule {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 2rem;
-  background-color: $backgroundDarkMain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  // If the screen is smaller than 1600px, change the grid-template-columns to 4x1
-  @media (max-width: 1600px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 1rem;
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 2rem;
+    background-color: $backgroundDarkMain;
+
+    // If the screen is smaller than 1600px, change the grid-template-columns to 4x1
+    @media (max-width: 1150px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
