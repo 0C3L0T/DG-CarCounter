@@ -29,6 +29,8 @@ async function getNextAvailableSlotAfter(
      * @returns [date, slot] where date is the date in iso format and slot is the slot number
      */
 
+    console.log("Getting next available slot after " + start)
+
     // check if the date is in the schedule
     if (schedules[start]) {
         // check if there are slots available
@@ -46,7 +48,7 @@ async function getNextAvailableSlotAfter(
         return getNextAvailableSlotAfter(schedules, nextDay.toISOString().slice(0, 10));
     }
 
-    // date not in the schedule, we can create it
+    // date is not in the schedule, return the first slot of the next day
     return [start, 0];
 }
 
@@ -61,14 +63,11 @@ async function buildScheduleDict(): Promise<{ [date: string]: Schedule }> {
 
     // get the last schedule with slots available
     const scheduleRef = admin.firestore().collection("schedule");
-    const scheduleQuery = await scheduleRef.limit(1).get();
+    const scheduleQuery = await scheduleRef.where("slots_available", ">", 0).get();
 
-    // if there is a latest schedule, add it to the schedules object
-    if (!scheduleQuery.empty) {
-        const lastSchedule = scheduleQuery.docs[0];
-        schedules[lastSchedule.id] =
-            new Schedule(lastSchedule.data().slots, lastSchedule.data().slots_available);
-    }
+    scheduleQuery.forEach((doc) => {
+        schedules[doc.id] = new Schedule(doc.data().slots, doc.data().slots_available);
+    });
 
     return schedules;
 }
@@ -112,16 +111,12 @@ export default async function scheduleOrder(
             lastScheduleDate = date;
         }
 
-        // add the order to the slot and store in intermediate object
-        if (schedules[date]) {
-            // add order to the existing schedule
-            schedules[date].addOrderToSlot(slot, orderId);
-        } else {
-            // create new schedule
-            const slots: [] = Array(10).fill("") as [];
-            schedules[date] = new Schedule(slots, 10);
-            schedules[date].addOrderToSlot(slot, orderId);
+        // create a new schedule for the date if it doesn't exist
+        if (!schedules[date]) {
+            schedules[date] = new Schedule(Array(10).fill(""), 10);
         }
+
+        schedules[date].addOrderToSlot(slot, orderId);
 
         duration--;
     }
@@ -139,5 +134,6 @@ export default async function scheduleOrder(
 
     // update the order status
     transaction.update(orderRef,
-        {status: "scheduled", duration: duration_copy, endDate: lastScheduleDate});
+        {status: "scheduled", duration: duration_copy, endDate: lastScheduleDate},
+    );
 }
