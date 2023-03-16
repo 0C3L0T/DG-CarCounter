@@ -1,0 +1,48 @@
+@import '../../assets/colours.scss';
+
+.chevron {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: $accentDark;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $accentMain;
+    cursor: pointer;
+  }
+
+  &:after {
+    opacity: 1;
+    content: "";
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: solid $textNeutralDarkStatic;
+    border-width: 0 0.125rem 0.125rem 0;
+    // Rotate from the bottom not the center
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    margin-bottom: calc(0.7071 * 0.25rem);
+  }
+}
+
+.expanded .chevron {
+  // Rotate 180 degrees and transition
+  -webkit-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+
+}
+
+.open-slot {
+  padding: 0.6875rem 1rem !important;
+}

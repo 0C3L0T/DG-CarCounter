@@ -62,8 +62,43 @@ body {
       color: $textNeutralDark;
     }
 
-    tr:nth-child(odd) {
+    tr:nth-of-type(odd) {
       background-color: $backgroundDarkLighter;
+    }
+  }
+
+  &--expandable table {
+    tr:nth-of-type(odd) {
+      background-color: transparent;
+    }
+
+    tr:nth-of-type(4n - 3) {
+      background-color: $backgroundDarkLighter;
+    }
+
+    tr:nth-of-type(4n - 2) {
+      background-color: $backgroundDarkLighter;
+    }
+
+    tr.expandable {
+      display: none;
+    }
+
+    tr.expanded + tr.expandable {
+      display: table-row;
+    }
+  }
+
+  &--inset table {
+    border: none;
+    border-radius: 0;
+
+    th {
+      background-color: transparent;
+    }
+
+    tr:nth-child(odd) {
+      background-color: transparent;
     }
   }
 }
