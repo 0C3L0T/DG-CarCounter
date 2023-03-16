@@ -8,4 +8,62 @@ h1 {
 body {
   background-color: $backgroundDarkMain;
   color: $textNeutralDark;
+  font-family: $textFont;
+}
+
+.table-view {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+
+  &--empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: $textNeutralDark;
+    background-color: $backgroundDarkMain;
+    border-radius: 0.5rem;
+    border: 1px solid $accentDark;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  table {
+    border: 0.125rem solid $accentDark;
+    border-radius: 0.5rem;
+    border-spacing: 0;
+    overflow: hidden;
+
+    thead {
+      text-align: left;
+      font-weight: bold;
+      color: $accentMain;
+      padding: 1rem;
+    }
+
+    th {
+      padding: 1rem;
+      color: $textNeutralDark;
+      background-color: $backgroundDarkMain;
+      border-bottom: 0.0625rem solid $accentDark;
+    }
+
+    td {
+      padding: 0.5rem 1rem;
+      color: $textNeutralDark;
+    }
+
+    tr:nth-child(odd) {
+      background-color: $backgroundDarkLighter;
+    }
+  }
 }

@@ -7,8 +7,6 @@ const Login = lazy(() => import('../Login/Login'));
 
 const auth = getAuth();
 
-import './order.scss';
-
 const Order: Component = () => {
     const [user, setUser] = createSignal<User|null>(null);
 
@@ -19,15 +17,7 @@ const Order: Component = () => {
     });
 
     return (
-        <Show
-            when={user()} fallback={
-                // TODO: It makes way more sense to just use your Login component here
-                <div>
-                    <p>Log in om een order te plaatsen</p>
-                    <Login/>
-                </div>
-            }
-            keyed>
+        <Show when={user()} fallback={<Login/>} keyed>
             <OrderForm/>
         </Show>
     );

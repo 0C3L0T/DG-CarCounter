@@ -17,12 +17,7 @@ const Overview = () => {
     });
 
     return (
-        <Show when={user()} fallback={
-            <div>
-                <p>Log in om de overzichten te bekijken</p>
-                <Login/>
-            </div>
-        } keyed>
+        <Show when={user()} fallback={<Login/>} keyed>
             <div>
                 <AllOrders/>
                 <Delivery/>

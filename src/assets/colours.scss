@@ -1,12 +1,17 @@
-//$neutralMain: #251A06;
- $neutralMain: rgb(18, 16, 17);
+// $neutralMain: #251A06;
+$neutralMain: rgb(18, 16, 17);
+$neutralLighter: rgb(35, 34, 33);
 $primaryMain: #FFAB00;
 $accentDark: #263788;
 $accentMain: #2DB7FF;
 $accentLight: #6874AA;
 
+$warningMain: #bb1313;
+
 $backgroundDarkMain: $neutralMain;
+$backgroundDarkLighter: $neutralLighter;
 $backgroundLightMain: #FFFFFF;
+$backgroundLightLighter: #F2F2F2;
 
 $textNeutralDark: #FFFFFF;
 $textPrimaryDark: $primaryMain;

@@ -4,6 +4,8 @@ import type {DocumentData} from "firebase/firestore";
 import {doc, getDoc, getFirestore, onSnapshot} from "firebase/firestore";
 import {For} from "solid-js/web";
 
+import "./scheduleDay.scss";
+
 const db = getFirestore()
 
 
@@ -36,11 +38,11 @@ const ScheduleDay: Component<{date: Date}> = (props) => {
     });
 
     return (
-        <div>
+        <div class="table-view">
             <h1>Werkorders voor {props.date.toLocaleDateString("nl-NL")}</h1>
             <Show
                 when={(!orders.loading && orders()!.length != 0)}
-                fallback={<div>Er zijn nog geen orders</div>}
+                fallback={<div class="table-view--empty">Er zijn nog geen orders</div>}
                 keyed>
                 <table>
                     <thead>
@@ -58,7 +60,7 @@ const ScheduleDay: Component<{date: Date}> = (props) => {
                     <tbody>
                     <For each={orders()}>
                         {(order) => (
-                            <Show when={order != null} fallback={<tr><td>Open slot</td></tr>} keyed>
+                            <Show when={order != null} fallback={<tr><td colSpan={8}>Open slot</td></tr>} keyed>
                                 <tr>
                                     <td>{order!.brand}</td>
                                     <td>{order!.model}</td>

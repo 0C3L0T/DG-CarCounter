@@ -10,6 +10,8 @@ import { createSignal, Show } from "solid-js";
 import { getFirestore, collection, onSnapshot } from "firebase/firestore";
 import type { DocumentData } from "firebase/firestore";
 
+import "./delivery.scss";
+
 const db = getFirestore();
 
 const Delivery: Component = () => {
@@ -32,11 +34,11 @@ const Delivery: Component = () => {
 
 
   return (
-    <div>
+    <div class="table-view">
       <h1>Afleveringen vandaag</h1>
       <Show
         when={orders().length != 0}
-        fallback={<div>Er wordt vandaag niks afgeleverd</div>}
+        fallback={<div class="delivery--empty">Er wordt vandaag niks afgeleverd</div>}
         keyed
       >
         <table>

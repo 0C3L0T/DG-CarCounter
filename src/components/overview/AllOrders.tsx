@@ -4,6 +4,8 @@ import { getFirestore, collection, onSnapshot} from "firebase/firestore";
 import type {DocumentReference} from "firebase/firestore";
 import { getFunctions, httpsCallable} from "firebase/functions";
 
+import './allOrders.scss';
+
 
 const db = getFirestore();
 const functions = getFunctions();
@@ -47,6 +49,7 @@ const OrderRow: Component<{orderRef: DocumentReference}> = (props) => {
                 <td>{order()?.isRush ? 'ja' : 'nee'}</td>
                 <td>
                     <button
+                        class="order-row__delete"
                         onClick={() => {
                             removeOrderWrapper(orderRef);
                         }}>
@@ -73,11 +76,11 @@ const AllOrders: Component = () => {
 
 
     return (
-        <div>
+        <div class="table-view">
             <h1>Alle Orders</h1>
             <Show
                 when={orderRefs().length != 0}
-                fallback={<div>Er zijn nog geen orders</div>}
+                fallback={<div class="table-view--empty"><p>Er zijn nog geen orders</p></div>}
                 keyed>
                 <table>
                     <thead>
@@ -94,6 +97,7 @@ const AllOrders: Component = () => {
                             <th>Duur(in tijdslots)</th>
                             <th>Betaald</th>
                             <th>Spoed</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

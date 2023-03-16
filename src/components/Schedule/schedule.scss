@@ -1,0 +1,19 @@
+@import '../../assets/colours.scss';
+
+.schedule {
+  display: grid;
+  // Create a 2x2 grid
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  // Set the gap between the grid items
+  grid-gap: 1rem;
+  // Set the width of the grid items
+  width: 100%;
+  // Set the height of the grid items
+  height: 100%;
+  // Set the padding of the grid
+  box-sizing: border-box;
+  padding: 2rem;
+  // Set the background color of the grid
+  background-color: $backgroundDarkMain;
+}

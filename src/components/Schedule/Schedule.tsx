@@ -5,6 +5,8 @@ import {onAuthStateChanged, getAuth, User} from "firebase/auth";
 const ScheduleDay = lazy(() => import('./ScheduleDay'));
 const Login = lazy(() => import('../Login/Login'));
 
+import "./schedule.scss";
+
 const auth = getAuth();
 
 const Schedule: Component = () => {
@@ -25,13 +27,8 @@ const Schedule: Component = () => {
     dayAfterDayAfterTomorrow.setDate(today.getDate() + 3);
 
     return (
-        <Show when={user()} fallback={
-            <div>
-                <p>Log in om de planning te bekijken</p>
-                <Login/>
-            </div>
-        } keyed>
-             <div>
+        <Show when={user()} fallback={<Login/>} keyed>
+             <div class="schedule">
                  <ScheduleDay date={today}/>
                  <ScheduleDay date={tomorrow}/>
                  <ScheduleDay date={dayAfterTomorrow}/>
